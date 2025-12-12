@@ -95,18 +95,23 @@ var options = new LgTvOptions()
 ## Connection Protocols
 
 ### LG Connect (WebSocket)
-The primary control method for WebOS TVs. Communicates over WebSocket on port 3000. Requires "LG Connect Apps" to be enabled and handles authentication/pairing.
+
+The primary control method for WebOS TVs. Communicates over WebSocket on port 3000. Requires "LG Connect Apps" to be
+enabled and handles authentication/pairing.
 
 **Port**: 3000 (default)  
 **Use for**: Main TV control, launching apps, media control, notifications
 
 ### RS-232 (Network Protocol)
-Network-based implementation of LG's RS-232 command protocol. Despite the name, this is **not** a hardware serial connection—it's a TCP/IP protocol on port 9761.
+
+Network-based implementation of LG's RS-232 command protocol. Despite the name, this is **not** a hardware serial
+connection—it's a TCP/IP protocol on port 9761.
 
 **Port**: 9761 (default)  
 **Use for**: Auto-accepting pairing prompts, sending navigation commands, power control
 
 ### IP Control
+
 LG's IP control protocol for commercial displays and TVs. Requires an IP control key from the TV's settings.
 
 **Port**: 9761 (default)  
@@ -126,6 +131,7 @@ var options = new LgTvOptions()
 ```
 
 **Available sequences**:
+
 - `LgAcceptSequence.DownEnter`: Arrow Down → OK
 - `LgAcceptSequence.RightEnter`: Arrow Right → OK
 
@@ -157,14 +163,15 @@ On first connection:
 
 1. Call `ConnectAsync()` - establishes WebSocket connection
 2. `OnAuthenticateRequested` fires when authentication is needed
-3. If pairing prompt appears and RS-232/IP Control is enabled, library auto-accepts
-4. Call `AuthenticateAsync(clientKey)` with saved key (or empty string for first time)
+3. Call `AuthenticateAsync(clientKey)` with saved key (or empty string for first time)
+4. If pairing prompt appears and RS-232/IP Control is enabled, library auto-accepts
 5. `OnClientKeyChanged` fires with the client key - **save this for future connections**
 6. `OnStateChanged` fires with `LgClientState.Ready` when connection is complete
 
 ## Available APIs
 
 ### Power Control
+
 ```csharp
 await tv.TurnOffAsync();                              // Turn TV off
 await tv.WakeOnLanAsync("AA:BB:CC:DD:EE:FF");        // Wake TV using MAC address
@@ -173,22 +180,26 @@ await tv.ScreenOffAsync();                            // Turn screen off (TV sta
 ```
 
 ### Volume & Audio
+
 ```csharp
 await tv.SetVolumeAsync(50);                          // Set volume (0-100)
 await tv.SetMuteAsync(0);                             // Mute/unmute
 ```
 
 ### Button Presses
+
 ```csharp
 await tv.PressButtonAsync(TvButton.VolumeUp);         // Press any button
 await tv.PressButtonAsync(TvButton.Enter);
 ```
 
-**Available buttons**: `Back`, `ChannelUp`, `ChannelDown`, `VolumeUp`, `VolumeDown`, `Left`, `Right`, `Up`, `Down`, `Menu`, `Enter`
+**Available buttons**: `Back`, `ChannelUp`, `ChannelDown`, `VolumeUp`, `VolumeDown`, `Left`, `Right`, `Up`, `Down`,
+`Menu`, `Enter`
 
 **Note**: Requires `UseIpControl` or `UseRs232` to be enabled
 
 ### Inputs & Channels
+
 ```csharp
 await tv.SwitchInputAsync(TvInput.Hdmi1);             // Switch HDMI input
 await tv.SwitchInputAsync(TvInput.LiveTv);            // Switch to Live TV
@@ -198,6 +209,7 @@ await tv.SetChannelAsync(15);                         // Change channel
 **Available inputs**: `Hdmi1`, `Hdmi2`, `Hdmi3`, `LiveTv`
 
 ### Screenshots
+
 ```csharp
 // Get screenshot URI
 string imageUri = await tv.ScreenshotAsync();
@@ -209,24 +221,27 @@ await tv.ScreenshotAsync(async uri => {
 ```
 
 ### Notifications
+
 ```csharp
 await tv.ShowToastAsync("Hello from LgTvConnect!");
 ```
 
 ### Advanced
+
 - Send raw SSAP commands via `LgConnectClient.RequestAsync()`
 - Subscribe to real-time TV events
 - Direct protocol command execution with `ExecuteRs232Async()` and `ExecuteIpControlAsync()`
 
 ## Network Ports
 
-| Protocol | Default Port | Purpose |
-|----------|-------------|---------|
-| LG Connect (WebSocket) | 3000 | Main TV control API |
-| RS-232 (Network) | 9761 | RS-232 command protocol over TCP |
-| IP Control | 9761 | IP control protocol |
+| Protocol               | Default Port | Purpose                          |
+|------------------------|--------------|----------------------------------|
+| LG Connect (WebSocket) | 3000         | Main TV control API              |
+| RS-232 (Network)       | 9761         | RS-232 command protocol over TCP |
+| IP Control             | 9761         | IP control protocol              |
 
-**Note**: RS-232 and IP Control use the same default port but are different protocols. Enable only one at a time unless using different port configurations.
+**Note**: RS-232 and IP Control use the same default port but are different protocols. Enable only one at a time unless
+using different port configurations.
 
 ## License
 
