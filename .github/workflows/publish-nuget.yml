@@ -1,0 +1,44 @@
+﻿name: "Nuget: publish"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "LgTvConnect/**.csproj"
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    # Enable OIDC
+    permissions: 
+      id-token: write
+      contents: read
+    
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      # Setup dotnet 9
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 9.0
+          
+      # Login using OIDC
+      - name: NuGet Login
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USERNAME }}
+      
+      # Run the publishing action
+      - name: Publish on version change
+        uses: alirezanet/publish-nuget@v3.1.0
+        with:
+          PROJECT_FILE_PATH: LgTvConnect/LgTvConnect.csproj
+          TAG_COMMIT: false
+          NUGET_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}

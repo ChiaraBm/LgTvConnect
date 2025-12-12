@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="LgTvConnect.Test/LgTvConnect.Test.csproj" />
+  <Project Path="LgTvConnect/LgTvConnect.csproj" />
+</Solution>

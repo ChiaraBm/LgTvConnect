@@ -1,0 +1,21 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tv-icon lucide-tv">
+    <defs>
+        <radialGradient gradientUnits="userSpaceOnUse" cx="12" cy="4.5" r="5" id="gradient-0">
+            <stop offset="0" style="stop-color: rgb(41.176% 25.882% 95.294% / 0.9)"></stop>
+            <stop offset="1" style="stop-color: rgb(17.951% 8.7766% 76.207% / 0.9)"></stop>
+        </radialGradient>
+        <radialGradient gradientUnits="userSpaceOnUse" cx="12" cy="14.5" r="10" id="gradient-1">
+            <stop offset="0" style="stop-color: rgb(41.176% 25.882% 95.294% / 0.9)"></stop>
+            <stop offset="1" style="stop-color: rgb(17.951% 8.7766% 76.207% / 0.9)"></stop>
+        </radialGradient>
+    </defs>
+    <path d="m17 2-5 5-5-5" style="stroke: url(#gradient-0);"></path>
+    <rect width="20" height="15" x="2" y="7" rx="2" style="stroke: url(#gradient-1);"></rect>
+    <g transform="matrix(1, 0, 0, 1, 0.792933, -0.1553)">
+        <path d="M 8.274 19.393 C 8.834 19.956 9.744 19.956 10.305 19.393 L 11.679 18.02 L 8.094 14.435 L 6.721 15.809 C 6.158 16.37 6.158 17.28 6.721 17.84 L 8.274 19.393 Z" style="stroke: rgba(109, 51, 212, 0.9); stroke-width: 1px;"></path>
+        <path d="M 5.705 20.409 L 7.497 18.617" style="stroke: rgba(109, 51, 212, 0.9); stroke-width: 1px;"></path>
+        <path d="M 8.991 15.331 L 10.484 13.838" style="stroke: rgba(109, 51, 212, 0.9); stroke-width: 1px;"></path>
+        <path d="M 10.783 17.123 L 12.276 15.63" style="stroke: rgba(109, 51, 212, 0.9); stroke-width: 1px;"></path>
+        <path d="M 15.263 9.059 L 12.873 11.448 L 16.458 11.448 L 14.068 13.838" style="stroke: rgba(109, 51, 212, 0.9); stroke-width: 1px;"></path>
+    </g>
+</svg>
