@@ -208,6 +208,21 @@ await tv.SetChannelAsync(15);                         // Change channel
 
 **Available inputs**: `Hdmi1`, `Hdmi2`, `Hdmi3`, `LiveTv`
 
+### Apps & Browser
+
+```csharp
+// Launch any app by ID
+await tv.LaunchAppAsync("com.webos.app.netflix");     // Launch Netflix
+await tv.LaunchAppAsync("youtube.leanback.v4");       // Launch YouTube
+
+// Close apps
+await tv.CloseAppAsync("com.webos.app.netflix");      // Close specific app
+
+// Browser control
+await tv.OpenBrowserAsync("https://example.com");     // Open URL in browser
+await tv.CloseWebBrowserAsync();                      // Close browser
+```
+
 ### Screenshots
 
 ```csharp

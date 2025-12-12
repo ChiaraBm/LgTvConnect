@@ -9,9 +9,7 @@ public partial class LgTvClient
 {
     public async Task ScreenshotAsync(Func<string, Task> callback)
     {
-        if (LgConnectClient.State != LgClientState.Ready)
-            throw new AggregateException(
-                "TV is not ready to receive such commands. Connection needs to be in Ready state");
+        ThrowIfNoReady();
 
         await LgConnectClient.RequestWithResultAsync<object, OneShotResponse>("ssap://tv/executeOneShot", null,
             async response => { await callback.Invoke(response.Payload.ImageUri); }
@@ -20,9 +18,7 @@ public partial class LgTvClient
 
     public async Task<string> ScreenshotAsync()
     {
-        if (LgConnectClient.State != LgClientState.Ready)
-            throw new AggregateException(
-                "TV is not ready to receive such commands. Connection needs to be in Ready state");
+        ThrowIfNoReady();
 
         var tcs = new TaskCompletionSource<string>();
 
@@ -39,9 +35,7 @@ public partial class LgTvClient
 
     public async Task SetChannelAsync(int channel)
     {
-        if (LgConnectClient.State != LgClientState.Ready)
-            throw new AggregateException(
-                "TV is not ready to receive such commands. Connection needs to be in Ready state");
+        ThrowIfNoReady();
 
         await LgConnectClient.RequestAsync("ssap://tv/openChannel", new OpenChannelRequest()
         {
@@ -51,9 +45,7 @@ public partial class LgTvClient
 
     public async Task SwitchInputAsync(TvInput input)
     {
-        if (LgConnectClient.State != LgClientState.Ready)
-            throw new AggregateException(
-                "TV is not ready to receive such commands. Connection needs to be in Ready state");
+        ThrowIfNoReady();
 
         if (input == TvInput.LiveTv)
         {

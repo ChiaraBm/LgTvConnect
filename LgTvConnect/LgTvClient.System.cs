@@ -10,8 +10,7 @@ public partial class LgTvClient
 {
     public async Task ShowToastAsync(string message)
     {
-        if (LgConnectClient.State != LgClientState.Ready)
-            throw new AggregateException("TV is not ready to receive such commands. Connection needs to be in Ready state");
+        ThrowIfNoReady();
 
         await LgConnectClient.RequestAsync("ssap://system.notifications/createToast", new CreateToastRequest()
         {
@@ -21,8 +20,7 @@ public partial class LgTvClient
     
     public async Task TurnOffAsync()
     {
-        if (LgConnectClient.State != LgClientState.Ready)
-            throw new AggregateException("TV is not ready to receive such commands. Connection needs to be in Ready state");
+        ThrowIfNoReady();
 
         await LgConnectClient.RequestAsync<object>("ssap://system/turnOff", null);
     }

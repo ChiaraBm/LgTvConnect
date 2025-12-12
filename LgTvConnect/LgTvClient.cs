@@ -140,6 +140,12 @@ public partial class LgTvClient : IAsyncDisposable
         await LgConnectClient.SendPacketAsync("register", request);
     }
 
+    private void ThrowIfNoReady()
+    {
+        if(LgConnectClient.State != LgClientState.Ready)
+            throw new AggregateException("TV is not ready to receive such commands. Connection needs to be in Ready state");
+    }
+    
     public async ValueTask DisposeAsync()
     {
         if (ConnectStateSubscription != null)

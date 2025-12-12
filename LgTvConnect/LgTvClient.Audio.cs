@@ -7,8 +7,7 @@ public partial class LgTvClient
 {
     public async Task SetVolumeAsync(int volume)
     {
-        if (LgConnectClient.State != LgClientState.Ready)
-            throw new AggregateException("TV is not ready to receive such commands. Connection needs to be in Ready state");
+        ThrowIfNoReady();
 
         await LgConnectClient.RequestAsync("ssap://audio/setVolume", new SetVolumeRequest()
         {
@@ -16,14 +15,13 @@ public partial class LgTvClient
         });
     }
     
-    public async Task SetMuteAsync(int volume)
+    public async Task SetMuteAsync(bool toggle)
     {
-        if (LgConnectClient.State != LgClientState.Ready)
-            throw new AggregateException("TV is not ready to receive such commands. Connection needs to be in Ready state");
+        ThrowIfNoReady();
 
-        await LgConnectClient.RequestAsync("ssap://audio/setVolume", new SetVolumeRequest()
+        await LgConnectClient.RequestAsync("ssap://audio/setMute", new SetMuteRequest()
         {
-            Volume = volume
+            Mute = toggle
         });
     }
 }
